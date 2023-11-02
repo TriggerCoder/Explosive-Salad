@@ -1,0 +1,51 @@
+[gd_scene load_steps=6 format=3 uid="uid://bqpkmx1drfxlp"]
+
+[ext_resource type="Script" path="res://scenes/rocket.gd" id="1_uinyx"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_w2tdr"]
+height = 0.5
+radius = 0.1
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_aumrn"]
+top_radius = 0.1
+bottom_radius = 0.1
+height = 0.5
+
+[sub_resource type="SphereMesh" id="SphereMesh_2g0qx"]
+radius = 0.1
+height = 0.5
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_xqejy"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/sync = true
+properties/0/watch = false
+properties/1/path = NodePath(".:rotation")
+properties/1/spawn = true
+properties/1/sync = true
+properties/1/watch = false
+properties/2/path = NodePath(".:name")
+properties/2/spawn = true
+properties/2/sync = true
+properties/2/watch = false
+
+[node name="Rocket" type="RigidBody3D"]
+continuous_cd = true
+max_contacts_reported = 1
+contact_monitor = true
+script = ExtResource("1_uinyx")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+shape = SubResource("CylinderShape3D_w2tdr")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+mesh = SubResource("CylinderMesh_aumrn")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, -0.25)
+mesh = SubResource("SphereMesh_2g0qx")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_xqejy")

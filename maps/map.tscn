@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://brnqkingfws2g"]
+
+[ext_resource type="PackedScene" uid="uid://ckf3250w8jpro" path="res://assets/Environment.glb" id="1_3aweu"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_5rm3c"]
+
+[sub_resource type="Sky" id="Sky_w2qqb"]
+sky_material = SubResource("ProceduralSkyMaterial_5rm3c")
+radiance_size = 1
+
+[sub_resource type="Environment" id="Environment_6knbf"]
+background_mode = 2
+background_energy_multiplier = 0.9
+sky = SubResource("Sky_w2qqb")
+tonemap_mode = 1
+glow_enabled = true
+
+[node name="Map" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.87001, -0.243018, 0.428982, 0.0991438, 0.766078, 0.635055, -0.482963, 0.595035, -0.642402, 0, 4, 0)
+shadow_enabled = true
+metadata/_edit_lock_ = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_6knbf")
+
+[node name="Environment" parent="." instance=ExtResource("1_3aweu")]
+metadata/_edit_lock_ = true

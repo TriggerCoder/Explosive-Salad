@@ -1,0 +1,32 @@
+extends RigidBody3D
+
+@export var last_body : CharacterBody3D = null
+
+func _ready():
+	if !is_multiplayer_authority():
+		return
+	$Area3D.connect("body_entered", _on_body_entered)
+	await get_tree().create_timer(1.0).timeout
+	explode.rpc()
+
+func _on_body_entered(body):
+	if !body.has_method("is_player"):
+		return
+	last_body = body
+	await get_tree().process_frame
+	explode.rpc()
+
+@rpc("call_local")
+func explode():
+	$Area3D.monitorable = false
+	$Area3D.monitoring = false
+	$Area3D/CollisionShape3D.disabled = true
+	var explosion = preload("res://scenes/explosion.tscn").instantiate()
+	explosion.position = position
+	Game.world.add_child(explosion)
+	if last_body != null:
+		last_body.health.hp -= 0.5
+	# Free only on server, handled by mp spawner
+	if !is_multiplayer_authority():
+		return
+	queue_free()

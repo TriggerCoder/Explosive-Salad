@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://c8oqxmm2w2wvv"]
+
+[ext_resource type="Script" path="res://scenes/world.gd" id="1_6tkge"]
+[ext_resource type="PackedScene" uid="uid://c2bdaid1j5nhu" path="res://scenes/menu.tscn" id="2_vk3p0"]
+[ext_resource type="PackedScene" uid="uid://brnqkingfws2g" path="res://maps/map.tscn" id="3_tfera"]
+
+[node name="World" type="Node"]
+script = ExtResource("1_6tkge")
+
+[node name="Menu" parent="." instance=ExtResource("2_vk3p0")]
+
+[node name="PlayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://scenes/player.tscn")
+spawn_path = NodePath("..")
+
+[node name="PropSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://scenes/grenade.tscn")
+spawn_path = NodePath("..")
+
+[node name="Map" parent="." instance=ExtResource("3_tfera")]
+metadata/_edit_lock_ = true
+
+[node name="View" type="Camera3D" parent="."]
+transform = Transform3D(0.999976, -0.00501219, 0.00480578, 0, 0.692088, 0.721813, -0.00694389, -0.721796, 0.692071, 0.0880087, 30.0758, 34.0497)
+current = true
+fov = 30.0
+metadata/_edit_lock_ = true
+
+[connection signal="spawned" from="PlayerSpawner" to="." method="_on_multiplayer_spawner_spawned"]

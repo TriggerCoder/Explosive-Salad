@@ -1,0 +1,61 @@
+[gd_scene load_steps=8 format=3 uid="uid://bns1hl11s4uxt"]
+
+[ext_resource type="Script" path="res://scenes/grenade.gd" id="1_k4dcu"]
+[ext_resource type="Material" uid="uid://bbpke8l8mbi5x" path="res://scenes/grenade.material" id="2_xr5jl"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_60b2e"]
+radius = 0.25
+
+[sub_resource type="SphereMesh" id="SphereMesh_n43e1"]
+material = ExtResource("2_xr5jl")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_aumrn"]
+material = ExtResource("2_xr5jl")
+top_radius = 0.125
+bottom_radius = 0.125
+height = 0.1
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_npyfs"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_xqejy"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/sync = true
+properties/0/watch = false
+properties/1/path = NodePath(".:rotation")
+properties/1/spawn = true
+properties/1/sync = true
+properties/1/watch = false
+properties/2/path = NodePath(".:name")
+properties/2/spawn = true
+properties/2/sync = false
+properties/2/watch = false
+
+[node name="Grenade" type="RigidBody3D"]
+collision_layer = 4
+continuous_cd = true
+max_contacts_reported = 1
+contact_monitor = true
+script = ExtResource("1_k4dcu")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_60b2e")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_n43e1")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.279141, 0)
+mesh = SubResource("CylinderMesh_aumrn")
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("SphereShape3D_npyfs")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_xqejy")

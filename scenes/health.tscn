@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://b5jq1ww01srst"]
+
+[ext_resource type="Script" path="res://scenes/health.gd" id="1_m1kbo"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_hl6jp"]
+properties/0/path = NodePath(".:hp")
+properties/0/spawn = true
+properties/0/sync = false
+properties/0/watch = true
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wmdqx"]
+bg_color = Color(0.6, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7dfpa"]
+bg_color = Color(0, 0.6, 0.14902, 1)
+
+[node name="Health" type="Node"]
+script = ExtResource("1_m1kbo")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_hl6jp")
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+offset_right = 640.0
+offset_bottom = 17.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 1
+theme_override_font_sizes/font_size = 12
+theme_override_styles/background = SubResource("StyleBoxFlat_wmdqx")
+theme_override_styles/fill = SubResource("StyleBoxFlat_7dfpa")
+max_value = 10.0
