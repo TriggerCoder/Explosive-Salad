@@ -8,6 +8,8 @@ A multiplayer prototype made with Godot Engine 4.1.
 - Explosions
 
 ## Plans
+- Gibs
+- Scoreboard
 - More maps
 - Mod support
 - Gamepad support
