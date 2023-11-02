@@ -3,6 +3,7 @@ A multiplayer prototype made with Godot Engine 4.1.
 
 ## Features
 - Animated character
+- Quake-like controller
 - PVP
 - Sound effects
 - Explosions
@@ -14,6 +15,14 @@ A multiplayer prototype made with Godot Engine 4.1.
 - Mod support
 - Gamepad support
 - More gameplay features
+
+## Controls
+
+| Key | Command |
+| --- | --- |
+| <kbd>W</kbd> <kbd>A</kbd> <kbd>S</kbd> <kbd>D</kbd> | Movement |
+| <kbd>Spacebar</kbd> | Jump |
+| <kbd>Left mouse button</kbd> | Shoot |
 
 ## Credits
 - Based on a simple multiplayer FPS prototype by [**devloglogan**](https://github.com/devloglogan) 
