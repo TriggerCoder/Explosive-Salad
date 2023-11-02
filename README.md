@@ -2,18 +2,18 @@
 A multiplayer prototype made with Godot Engine 4.1.
 
 ## Features
+- Gamepad support
 - Animated character
 - Quake-like controller
 - PVP
 - Sound effects
 - Explosions
+- Scoreboard
 
 ## Plans
 - Gibs
-- Scoreboard
 - More maps
 - Mod support
-- Gamepad support
 - More gameplay features
 
 ## Controls
