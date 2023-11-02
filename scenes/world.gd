@@ -24,6 +24,11 @@ func join():
 	enet_peer.create_client(address_entry.text, PORT)
 	multiplayer.multiplayer_peer = enet_peer
 
+func quickjoin():
+	# Join my server
+	enet_peer.create_client("188.225.38.117", PORT)
+	multiplayer.multiplayer_peer = enet_peer
+
 func add_player(peer_id):
 	var player = preload("res://scenes/player.tscn").instantiate()
 	player.name = str(peer_id)

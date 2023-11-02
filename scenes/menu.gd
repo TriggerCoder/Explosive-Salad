@@ -1,8 +1,8 @@
 extends Control
 
 func _on_quick_button_pressed():
-	# Join my IP
-	pass
+	Game.world.quickjoin()
+	queue_free()
 
 func _on_host_button_pressed():
 	Game.world.host()
