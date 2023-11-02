@@ -18,11 +18,12 @@ A multiplayer prototype made with Godot Engine 4.1.
 
 ## Controls
 
-| Key | Command |
-| --- | --- |
-| <kbd>W</kbd> <kbd>A</kbd> <kbd>S</kbd> <kbd>D</kbd> | Movement |
-| <kbd>Spacebar</kbd> | Jump |
-| <kbd>Left mouse button</kbd> | Shoot |
+| Keyboard & Mouse | Gamepad | Command |
+| --- | --- | --- |
+| <kbd>W</kbd> <kbd>A</kbd> <kbd>S</kbd> <kbd>D</kbd> | <kbd>Left Stick</kbd> | Movement |
+| <kbd>Mouse Movement</kbd> | <kbd>Right Stick</kbd> | Look around |
+| <kbd>Spacebar</kbd> | <kbd>X</kbd> | Jump |
+| <kbd>Left Mouse Button</kbd> | <kbd>Right Trigger</kbd> | Shoot |
 
 ## Credits
 - Based on a simple multiplayer FPS prototype by [**devloglogan**](https://github.com/devloglogan) 
