@@ -1,17 +1,18 @@
 extends CharacterBody3D
 
-signal health_changed(health_value)
-
 @onready var camera = $Camera3D
 @onready var anim_player = $AnimationPlayer
 @onready var muzzle_flash = $Camera3D/Pistol/MuzzleFlash
 @onready var raycast = $Camera3D/RayCast3D
 @onready var health = $Health
+@onready var scoreboard = $Scoreboard
 
 # Animation
 @onready var sm_playback : AnimationNodeStateMachinePlayback = $Player/AnimationTree.get("parameters/sm/playback")
 
-@export var mouse_sens : float = 0.0025
+@export var mouse_sens : float = 0.005
+@export var gamepad_sens : float = 0.05
+
 var friction: float = 4
 var accel: float = 12
 # 4 for quake 2/3 40 for quake 1/source
@@ -53,10 +54,12 @@ func _unhandled_input(event):
 	if Input.is_action_just_pressed("ui_cancel"):
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED if Input.mouse_mode == Input.MOUSE_MODE_VISIBLE else Input.MOUSE_MODE_VISIBLE
 	if not Input.mouse_mode == Input.MOUSE_MODE_CAPTURED: return
+	# Mouselook
 	if event is InputEventMouseMotion:
 		rotate_y(-event.relative.x * mouse_sens)
 		camera.rotate_x(-event.relative.y * mouse_sens)
 		camera.rotation.x = clamp(camera.rotation.x, -1.5, 1.5)
+	# Firing
 	if Input.is_action_just_pressed("shoot") and anim_player.current_animation != "shoot":
 		play_shoot_effects.rpc()
 		spawn_grenade.rpc()
@@ -65,9 +68,16 @@ func _physics_process(delta):
 	process_animations()
 	if not is_multiplayer_authority(): return
 	if not Input.mouse_mode == Input.MOUSE_MODE_CAPTURED: return
+	process_gamepad()
 	process_steps(delta)
 	process_movement(delta)
 	process_bounds()
+
+func process_gamepad():
+	var gamepad_look : Vector2 = Input.get_vector("look_left", "look_right", "look_up", "look_down")
+	rotate_y(-gamepad_look.x * gamepad_sens)
+	camera.rotate_x(-gamepad_look.y * gamepad_sens)
+	camera.rotation.x = clamp(camera.rotation.x, -1.5, 1.5)
 
 func process_animations():
 	# Ground movement blend space
@@ -165,6 +175,7 @@ func spawn_grenade():
 	if not multiplayer.is_server():
 		return
 	var grenade = preload("res://scenes/grenade.tscn").instantiate()
+	grenade.instigator = name.to_int()
 	Game.world.add_child(grenade, true)
 	grenade.global_transform = $Camera3D/RayCast3D/Marker3D.global_transform
 	grenade.apply_central_impulse(raycast.global_transform.basis.z * -25.0)

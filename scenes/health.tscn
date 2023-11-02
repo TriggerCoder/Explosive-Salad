@@ -7,6 +7,14 @@ properties/0/path = NodePath(".:hp")
 properties/0/spawn = true
 properties/0/sync = false
 properties/0/watch = true
+properties/1/path = NodePath(".:last_damage_dealer")
+properties/1/spawn = true
+properties/1/sync = false
+properties/1/watch = true
+properties/2/path = NodePath(".:dead")
+properties/2/spawn = true
+properties/2/sync = false
+properties/2/watch = true
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wmdqx"]
 bg_color = Color(0.6, 0, 0, 1)
@@ -21,8 +29,14 @@ script = ExtResource("1_m1kbo")
 replication_config = SubResource("SceneReplicationConfig_hl6jp")
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
-offset_right = 640.0
-offset_bottom = 17.0
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 24.0
+offset_top = -48.0
+offset_right = 216.0
+offset_bottom = -24.0
+grow_vertical = 0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 1

@@ -1,5 +1,6 @@
 extends RigidBody3D
 
+@export var instigator : int = 1
 @export var last_body : CharacterBody3D = null
 
 func _ready():
@@ -23,9 +24,11 @@ func explode():
 	$Area3D/CollisionShape3D.disabled = true
 	var explosion = preload("res://scenes/explosion.tscn").instantiate()
 	explosion.position = position
+	explosion.instigator = instigator
 	Game.world.add_child(explosion)
 	if last_body != null:
 		last_body.health.hp -= 0.5
+		last_body.health.last_damage_dealer = instigator
 	# Free only on server, handled by mp spawner
 	if !is_multiplayer_authority():
 		return

@@ -11,6 +11,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_kwpvg")
+metadata/_edit_lock_ = true
 
 [node name="Background" type="ColorRect" parent="."]
 layout_mode = 1
@@ -20,11 +21,13 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.898039)
+metadata/_edit_lock_ = true
 
 [node name="Splash" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 1, 0.172549)
 position = Vector2(320, 180)
 texture = ExtResource("2_1f40s")
+metadata/_edit_lock_ = true
 
 [node name="Main" type="PanelContainer" parent="."]
 custom_minimum_size = Vector2(320, 240)
@@ -40,6 +43,7 @@ offset_right = 160.0
 offset_bottom = 146.0
 grow_horizontal = 2
 grow_vertical = 2
+metadata/_edit_lock_ = true
 
 [node name="MarginContainer" type="MarginContainer" parent="Main"]
 custom_minimum_size = Vector2(320, 240)
@@ -48,39 +52,47 @@ theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
+metadata/_edit_lock_ = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Main/MarginContainer"]
 layout_mode = 2
 theme_override_constants/separation = 15
+metadata/_edit_lock_ = true
 
 [node name="Title" type="Label" parent="Main/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Explosive Salad"
 horizontal_alignment = 1
 vertical_alignment = 1
+metadata/_edit_lock_ = true
 
 [node name="QuickButton" type="Button" parent="Main/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Quick Play"
+metadata/_edit_lock_ = true
 
 [node name="HostButton" type="Button" parent="Main/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Host Game"
+metadata/_edit_lock_ = true
 
 [node name="LabelJoin" type="Label" parent="Main/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Join"
 horizontal_alignment = 1
 vertical_alignment = 1
+metadata/_edit_lock_ = true
 
 [node name="AddressEntry" type="LineEdit" parent="Main/MarginContainer/VBoxContainer"]
 layout_mode = 2
 placeholder_text = "IP address to Join"
 alignment = 1
+metadata/_edit_lock_ = true
 
 [node name="JoinButton" type="Button" parent="Main/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Join Game"
+metadata/_edit_lock_ = true
 
 [connection signal="pressed" from="Main/MarginContainer/VBoxContainer/QuickButton" to="." method="_on_quick_button_pressed"]
 [connection signal="pressed" from="Main/MarginContainer/VBoxContainer/HostButton" to="." method="_on_host_button_pressed"]
