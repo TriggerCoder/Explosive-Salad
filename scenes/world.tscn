@@ -17,13 +17,12 @@ spawn_path = NodePath("..")
 _spawnable_scenes = PackedStringArray("res://scenes/grenade.tscn")
 spawn_path = NodePath("..")
 
-[node name="Map" parent="." instance=ExtResource("3_tfera")]
-metadata/_edit_lock_ = true
-
 [node name="View" type="Camera3D" parent="."]
 transform = Transform3D(0.999976, -0.00501219, 0.00480578, 0, 0.692088, 0.721813, -0.00694389, -0.721796, 0.692071, 0.0880087, 30.0758, 34.0497)
 current = true
 fov = 30.0
 metadata/_edit_lock_ = true
+
+[node name="Map" parent="." instance=ExtResource("3_tfera")]
 
 [connection signal="spawned" from="PlayerSpawner" to="." method="_on_multiplayer_spawner_spawned"]

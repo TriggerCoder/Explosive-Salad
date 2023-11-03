@@ -27,8 +27,8 @@ func explode():
 	explosion.instigator = instigator
 	Game.world.add_child(explosion)
 	if last_body != null:
-		last_body.health.hp -= 0.5
 		last_body.health.last_damage_dealer = instigator
+		last_body.health.hp -= 0.5
 	# Free only on server, handled by mp spawner
 	if !is_multiplayer_authority():
 		return
