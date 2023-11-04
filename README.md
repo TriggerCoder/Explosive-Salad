@@ -5,6 +5,7 @@ A multiplayer prototype made with Godot Engine 4.1.
 
 ## Features
 - Animated characters
+- Ragdolls
 - Quake-like controller
 - Simple zombie bots
 - PVP
@@ -34,5 +35,6 @@ A multiplayer prototype made with Godot Engine 4.1.
 https://github.com/devloglogan/MultiplayerFPSTutorial 
 - Movement mechanics are based on a repo demonstrating quake movement by [**EthanTheEnigma**](https://github.com/EthanTheEnigma) 
 https://github.com/EthanTheEnigma/quake-godot-4-tutorial 
-- Sounds and characters are work-in-progress, made by **ic3bug** and released as CC0 Public-domain
+- Sounds and characters are work-in-progress, made by [**ic3bug**](https://github.com/ic3bug) and released under [CC0](https://creativecommons.org/public-domain/cc0/)
+- Music by [**ic3bug**](https://github.com/ic3bug) under [CC BY](https://creativecommons.org/licenses/by/4.0/)
 - Texture assets as addons by [**Kenney**](https://kenney.nl/)
