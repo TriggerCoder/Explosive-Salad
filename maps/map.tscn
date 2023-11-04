@@ -1218,6 +1218,38 @@ end_position = Vector3(-3, 4, 0)
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 27, 6, 0)
 end_position = Vector3(-4, 2, 0)
 
+[node name="NavigationLink3D11" type="NavigationLink3D" parent="Environment"]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 22, 2, 26)
+end_position = Vector3(-3, 4, 0)
+
+[node name="NavigationLink3D12" type="NavigationLink3D" parent="Environment"]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 27, 6, 26)
+end_position = Vector3(-4, 2, 0)
+
+[node name="NavigationLink3D13" type="NavigationLink3D" parent="Environment"]
+transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, -26, 2, 23)
+end_position = Vector3(-3, 4, 0)
+
+[node name="NavigationLink3D14" type="NavigationLink3D" parent="Environment"]
+transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, -26, 6, 28)
+end_position = Vector3(-4, 2, 0)
+
+[node name="NavigationLink3D15" type="NavigationLink3D" parent="Environment"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -26, 2, -22)
+end_position = Vector3(-3, 4, 0)
+
+[node name="NavigationLink3D16" type="NavigationLink3D" parent="Environment"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -26, 6, -27)
+end_position = Vector3(-4, 2, 0)
+
+[node name="NavigationLink3D17" type="NavigationLink3D" parent="Environment"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 26, 2, -22)
+end_position = Vector3(-3, 4, 0)
+
+[node name="NavigationLink3D18" type="NavigationLink3D" parent="Environment"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 26, 6, -27)
+end_position = Vector3(-4, 2, 0)
+
 [node name="Spawns" type="Node" parent="."]
 
 [node name="Marker3D" type="Marker3D" parent="Spawns"]

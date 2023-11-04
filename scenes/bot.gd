@@ -12,7 +12,11 @@ var attack_hand_cycle : bool = false
 @onready var sm_playback : AnimationNodeStateMachinePlayback = $Character/AnimationTree.get("parameters/sm/playback")
 @onready var health = $Health
 
+var last_velocity : Vector3
+
 func _ready() -> void:
+	health.connect("died", _on_death)
+	health.connect("spawned", _on_spawn)
 	$Character/AnimationTree.active = true
 	navigation_agent.velocity_computed.connect(_on_velocity_computed)
 	navigation_agent.link_reached.connect(_on_navlink_reached)
@@ -30,12 +34,17 @@ func process_animations():
 	else:
 		sm_playback.travel("air")
 
-func _physics_process(_delta):
+func process_bounds():
+	if position.y <= -10.0:
+		position = Game.get_spawn()
+
+func _physics_process(delta):
 	process_animations()
 	if not multiplayer.is_server(): return
 	
-	if not is_on_floor(): velocity.y -= Game.GRAVITY
-	if is_on_floor(): velocity.y = 0.0
+	process_bounds()
+	
+	if not is_on_floor(): velocity.y -= Game.GRAVITY * delta
 
 	if target == null: 
 		target = get_closest_target()
@@ -54,9 +63,11 @@ func _physics_process(_delta):
 	var current_agent_position: Vector3 = global_position
 	var new_velocity: Vector3 = (next_path_position - current_agent_position).normalized() * movement_speed
 	if navigation_agent.avoidance_enabled:
-		navigation_agent.set_velocity(new_velocity)
+		navigation_agent.velocity = new_velocity
 	else:
 		_on_velocity_computed(new_velocity)
+		
+	last_velocity = velocity
 	
 	if position.distance_squared_to(target.position) <= 1.0 and !attacked:
 		var attack_target = $RayCast3D.get_collider()
@@ -104,6 +115,17 @@ func is_bot():
 
 func _on_navlink_reached(_dict):
 	# print('Reached')
-	velocity.y += 100.0
-	velocity += global_transform.basis.z * -200.0
-	navigation_agent.set_velocity(velocity)
+	velocity.y += 10.0
+	velocity += (position - _dict.link_exit_position).normalized() * -10.0
+	if navigation_agent.avoidance_enabled:
+		navigation_agent.set_velocity(velocity)
+
+func _on_death():
+	visible = false
+	$CollisionShape3D.disabled = true
+	Game.spawn_ragdoll($Character/Player/Armature/Skeleton3D, last_velocity)
+	
+func _on_spawn():
+	visible = true
+	$CollisionShape3D.disabled = false
+	position = Game.get_spawn()

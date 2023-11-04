@@ -1,5 +1,8 @@
 extends Node
 
+signal died
+signal spawned
+
 const MAX_HP : float = 10.0
 @export var hp : float = 10.0 : set = _set_hp, get = _get_hp
 @export var last_damage_dealer : int = 1
@@ -24,23 +27,10 @@ func _get_hp():
 func die():
 	if dead: return
 	dead = true
-	$"..".visible = false
-	if get_parent().has_node("CollisionShape3D"):
-		$"../CollisionShape3D".disabled = true
-	if get_parent().has_node("CollisionShape3D2"):
-		$"../CollisionShape3D2".disabled = true
-	if get_parent().has_node("Camera3D"):
-		$"../Camera3D".current = false
+	emit_signal("died")
 	await get_tree().create_timer(1.0).timeout
 	dead = false
-	$"..".visible = true
-	if get_parent().has_node("CollisionShape3D"):
-		$"../CollisionShape3D".disabled = false
-	if get_parent().has_node("CollisionShape3D2"):
-		$"../CollisionShape3D2".disabled = false
-	$"..".position = Game.get_spawn()
-	if get_parent().has_node("Camera3D"):
-		$"../Camera3D".current = get_parent().is_multiplayer_authority()
+	emit_signal("spawned")
 	hp = MAX_HP
 	var dealer = Game.world.get_node(str(last_damage_dealer))
 	if dealer == null:

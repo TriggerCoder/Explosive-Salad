@@ -26,7 +26,6 @@ Game="*res://scenes/game.gd"
 
 window/size/viewport_width=640
 window/size/viewport_height=360
-window/size/mode=3
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 
@@ -103,5 +102,6 @@ show_score={
 
 3d_physics/layer_1="World"
 3d_physics/layer_2="Players"
-3d_physics/layer_3="Props"
+3d_physics/layer_3="Grenades"
 3d_physics/layer_4="Bots"
+3d_physics/layer_5="Ragdolls"

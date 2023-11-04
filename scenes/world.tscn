@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://c8oqxmm2w2wvv"]
+[gd_scene load_steps=5 format=3 uid="uid://c8oqxmm2w2wvv"]
 
 [ext_resource type="Script" path="res://scenes/world.gd" id="1_6tkge"]
 [ext_resource type="PackedScene" uid="uid://c2bdaid1j5nhu" path="res://scenes/menu.tscn" id="2_vk3p0"]
 [ext_resource type="PackedScene" uid="uid://brnqkingfws2g" path="res://maps/map.tscn" id="3_tfera"]
+[ext_resource type="AudioStream" uid="uid://c6pjjaumo5u2q" path="res://music/bouncy.ogg" id="4_lr5cg"]
 
 [node name="World" type="Node"]
 script = ExtResource("1_6tkge")
@@ -29,5 +30,10 @@ fov = 30.0
 metadata/_edit_lock_ = true
 
 [node name="Map" parent="." instance=ExtResource("3_tfera")]
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_lr5cg")
+autoplay = true
+bus = &"Music"
 
 [connection signal="spawned" from="PlayerSpawner" to="." method="_on_multiplayer_spawner_spawned"]

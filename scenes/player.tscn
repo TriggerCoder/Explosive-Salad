@@ -149,6 +149,10 @@ properties/4/path = NodePath(".:grounded")
 properties/4/spawn = false
 properties/4/sync = true
 properties/4/watch = false
+properties/5/path = NodePath(".:last_velocity")
+properties/5/spawn = false
+properties/5/sync = true
+properties/5/watch = false
 
 [node name="Player" type="CharacterBody3D" groups=["Players"]]
 collision_layer = 2

@@ -155,9 +155,11 @@ parameters/sm/ground/blend_position = Vector2(-0.0018248, 0)
 [node name="SoundAttack" type="AudioStreamPlayer3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.725, 0.1)
 stream = SubResource("AudioStreamRandomizer_08jnx")
+bus = &"Sounds"
 
 [node name="SoundStep" type="AudioStreamPlayer3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15, 0)
+bus = &"Sounds"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="SoundStep"]
 libraries = {
@@ -168,19 +170,19 @@ libraries = {
 
 [node name="Skeleton3D" parent="Player/Armature" index="0"]
 bones/0/position = Vector3(0, 0.699819, 0)
-bones/0/rotation = Quaternion(0.000160807, 7.77929e-06, 8.79797e-05, 1)
-bones/1/rotation = Quaternion(-6.06095e-05, 5.38981e-06, 0.050109, 0.998744)
-bones/3/rotation = Quaternion(0.700794, 0.0819755, 0.703808, -0.0825971)
-bones/4/rotation = Quaternion(-0.149919, -0.620077, 0.0732628, 0.766591)
+bones/0/rotation = Quaternion(0.00016081, 7.71252e-06, 8.72245e-05, 1)
+bones/1/rotation = Quaternion(-6.26492e-05, 6.02154e-06, 0.0517657, 0.998659)
+bones/3/rotation = Quaternion(0.700765, 0.0822181, 0.703779, -0.0828408)
+bones/4/rotation = Quaternion(-0.150648, -0.620006, 0.0738494, 0.766449)
 bones/5/rotation = Quaternion(0.0738187, 0.747472, -0.0544965, 0.657926)
-bones/6/rotation = Quaternion(-0.701434, 0.0801944, 0.703557, 0.0810392)
-bones/7/rotation = Quaternion(-0.129486, 0.548331, -0.0127296, 0.826078)
+bones/6/rotation = Quaternion(-0.701495, 0.0796586, 0.703619, 0.0805016)
+bones/7/rotation = Quaternion(-0.128025, 0.548356, -0.0117657, 0.826303)
 bones/8/rotation = Quaternion(0.0738187, -0.747472, 0.0544965, 0.657926)
-bones/9/rotation = Quaternion(0.999476, 0.00927779, 0.00896406, -0.0296958)
+bones/9/rotation = Quaternion(0.999476, 0.00929736, 0.00895967, -0.0296921)
 bones/10/rotation = Quaternion(-0.0170464, -0.0719658, 0.0104944, 0.997206)
-bones/11/rotation = Quaternion(0.0580139, 0.748754, -0.659275, 0.036858)
-bones/12/rotation = Quaternion(0.999481, -0.00960281, -0.00929114, -0.0293054)
-bones/13/rotation = Quaternion(-0.0158013, 0.0720588, -0.0103981, 0.997221)
-bones/14/rotation = Quaternion(-0.0580121, 0.748423, -0.65963, -0.0372218)
+bones/11/rotation = Quaternion(0.0580383, 0.748741, -0.659289, 0.0368453)
+bones/12/rotation = Quaternion(0.999481, -0.00961684, -0.0092911, -0.0293057)
+bones/13/rotation = Quaternion(-0.0158232, 0.072056, -0.010399, 0.997221)
+bones/14/rotation = Quaternion(-0.0580062, 0.748414, -0.659641, -0.0372245)
 
 [editable path="Player"]

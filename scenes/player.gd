@@ -36,11 +36,16 @@ var bob_enabled : bool = true
 var bob_time : float = 0.0
 var bob_current : Vector2
 
+# For ragdolls
+var last_velocity : Vector3
+
 func _enter_tree():
 	set_multiplayer_authority(str(name).to_int())
 	$Label3D.text = name
 
 func _ready():
+	health.connect("died", _on_death)
+	health.connect("spawned", _on_spawn)
 	$Character/AnimationTree.active = true
 	if not is_multiplayer_authority(): return
 	$Character/Player/Armature/Skeleton3D/Pickle.cast_shadow = MeshInstance3D.SHADOW_CASTING_SETTING_SHADOWS_ONLY
@@ -89,7 +94,7 @@ func process_animations():
 
 func process_bounds():
 	if position.y <= -10.0:
-		position = Vector3(0.0, 2.0, 0.0)
+		position = Game.get_spawn()
 
 func clip_velocity(normal: Vector3, overbounce: float) -> void:
 	var correction_amount: float = 0
@@ -158,6 +163,7 @@ func process_movement(delta):
 		else:
 			grounded = true
 			ground_move(delta)
+	last_velocity = velocity
 	move_and_slide()
 
 @rpc("call_local")
@@ -223,3 +229,17 @@ func add_force(dir : Vector3, force : float):
 @rpc("call_local")
 func play_footstep():
 	$Character/SoundStep/AnimationPlayer.play("step")
+
+func _on_death():
+	visible = false
+	$CollisionShape3D.disabled = true
+	$CollisionShape3D2.disabled = true
+	$Camera3D.current = false
+	Game.spawn_ragdoll($Character/Player/Armature/Skeleton3D, last_velocity)
+
+func _on_spawn():
+	visible = true
+	$CollisionShape3D.disabled = false
+	$CollisionShape3D2.disabled = false
+	position = Game.get_spawn()
+	$Camera3D.current = is_multiplayer_authority()
