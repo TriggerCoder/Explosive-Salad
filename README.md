@@ -1,6 +1,8 @@
 # Explosive Salad
 A multiplayer prototype made with Godot Engine 4.1.
 
+[<img src="https://i.ytimg.com/an_webp/qWzWZTfvl8Q/mqdefault_6s.webp?du=3000&sqp=CPjlmaoG&rs=AOn4CLB60eYglNPseA-BVnmpcTuyN9OJuA">](https://www.youtube.com/watch?v=qWzWZTfvl8Q)
+
 ## Features
 - Animated characters
 - Quake-like controller
