@@ -166,6 +166,7 @@ func play_shoot_effects():
 	anim_player.play("shoot")
 	muzzle_flash.restart()
 	muzzle_flash.emitting = true
+	$Character/SoundAttack.play()
 
 @rpc("call_local")
 func spawn_grenade():

@@ -1,5 +1,9 @@
-[gd_scene load_steps=28 format=3 uid="uid://kqygvnjggnce"]
+[gd_scene load_steps=33 format=3 uid="uid://kqygvnjggnce"]
 
+[ext_resource type="AudioStream" uid="uid://c70qa2nwa1lwn" path="res://sounds/farts/fart_1.wav" id="1_dlsv4"]
+[ext_resource type="AudioStream" uid="uid://do2w0kt07sy6a" path="res://sounds/farts/fart_2.wav" id="2_skuty"]
+[ext_resource type="AudioStream" uid="uid://ba1ayk3yu6q38" path="res://sounds/farts/fart_3.wav" id="3_gyte0"]
+[ext_resource type="AudioStream" uid="uid://c7eyt1lbyhl8f" path="res://sounds/farts/fart_4.wav" id="4_c0ouf"]
 [ext_resource type="PackedScene" uid="uid://cuwpebe64aogs" path="res://assets/Player.glb" id="5_0il0j"]
 [ext_resource type="AudioStream" uid="uid://b7ouer8gpge8d" path="res://sounds/steps/step_1.wav" id="5_e3er6"]
 [ext_resource type="AudioStream" uid="uid://h3rbvwxu75ua" path="res://sounds/steps/step_2.wav" id="6_1qtgw"]
@@ -93,6 +97,17 @@ nodes/sm/node = SubResource("AnimationNodeStateMachine_f5ik0")
 nodes/sm/position = Vector2(-20, 160)
 node_connections = [&"output", 0, &"sm"]
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_08jnx"]
+streams_count = 4
+stream_0/stream = ExtResource("1_dlsv4")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("2_skuty")
+stream_1/weight = 1.0
+stream_2/stream = ExtResource("3_gyte0")
+stream_2/weight = 1.0
+stream_3/stream = ExtResource("4_c0ouf")
+stream_3/weight = 1.0
+
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_1hpt6"]
 streams_count = 4
 stream_0/stream = ExtResource("5_e3er6")
@@ -139,6 +154,7 @@ parameters/sm/ground/blend_position = Vector2(-0.0018248, 0)
 
 [node name="SoundAttack" type="AudioStreamPlayer3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.725, 0.1)
+stream = SubResource("AudioStreamRandomizer_08jnx")
 
 [node name="SoundStep" type="AudioStreamPlayer3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15, 0)
@@ -151,20 +167,20 @@ libraries = {
 [node name="Player" parent="." instance=ExtResource("5_0il0j")]
 
 [node name="Skeleton3D" parent="Player/Armature" index="0"]
-bones/0/position = Vector3(0, 0.699801, 0)
-bones/0/rotation = Quaternion(0.000160776, 8.6977e-06, 9.83663e-05, 1)
-bones/1/rotation = Quaternion(-5.58925e-05, 1.27199e-06, 0.0923295, 0.995729)
-bones/3/rotation = Quaternion(0.698973, 0.0962716, 0.701974, -0.0969547)
-bones/4/rotation = Quaternion(-0.189301, -0.615391, 0.105001, 0.757914)
+bones/0/position = Vector3(0, 0.699819, 0)
+bones/0/rotation = Quaternion(0.000160807, 7.77929e-06, 8.79797e-05, 1)
+bones/1/rotation = Quaternion(-6.06095e-05, 5.38981e-06, 0.050109, 0.998744)
+bones/3/rotation = Quaternion(0.700794, 0.0819755, 0.703808, -0.0825971)
+bones/4/rotation = Quaternion(-0.149919, -0.620077, 0.0732628, 0.766591)
 bones/5/rotation = Quaternion(0.0738187, 0.747472, -0.0544965, 0.657926)
-bones/6/rotation = Quaternion(-0.693166, 0.13402, 0.695218, 0.135025)
-bones/7/rotation = Quaternion(-0.137525, 0.548165, -0.0180369, 0.824789)
+bones/6/rotation = Quaternion(-0.701434, 0.0801944, 0.703557, 0.0810392)
+bones/7/rotation = Quaternion(-0.129486, 0.548331, -0.0127296, 0.826078)
 bones/8/rotation = Quaternion(0.0738187, -0.747472, 0.0544965, 0.657926)
-bones/9/rotation = Quaternion(0.999476, 0.00935231, 0.00894753, -0.0296816)
+bones/9/rotation = Quaternion(0.999476, 0.00927779, 0.00896406, -0.0296958)
 bones/10/rotation = Quaternion(-0.0170464, -0.0719658, 0.0104944, 0.997206)
-bones/11/rotation = Quaternion(0.0576042, 0.748856, -0.659177, 0.0371673)
-bones/12/rotation = Quaternion(0.999481, -0.00965436, -0.00929098, -0.0293065)
-bones/13/rotation = Quaternion(-0.0165193, 0.0719712, -0.0104333, 0.997215)
-bones/14/rotation = Quaternion(-0.0581837, 0.748635, -0.659379, -0.0371567)
+bones/11/rotation = Quaternion(0.0580139, 0.748754, -0.659275, 0.036858)
+bones/12/rotation = Quaternion(0.999481, -0.00960281, -0.00929114, -0.0293054)
+bones/13/rotation = Quaternion(-0.0158013, 0.0720588, -0.0103981, 0.997221)
+bones/14/rotation = Quaternion(-0.0580121, 0.748423, -0.65963, -0.0372218)
 
 [editable path="Player"]
