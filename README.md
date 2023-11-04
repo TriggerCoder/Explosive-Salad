@@ -2,10 +2,11 @@
 A multiplayer prototype made with Godot Engine 4.1.
 
 ## Features
-- Gamepad support
-- Animated character
+- Animated characters
 - Quake-like controller
+- Simple zombie bots
 - PVP
+- Gamepad support
 - Sound effects
 - Explosions
 - Scoreboard
