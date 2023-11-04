@@ -8,7 +8,7 @@ extends CharacterBody3D
 @onready var scoreboard = $Scoreboard
 
 # Animation
-@onready var sm_playback : AnimationNodeStateMachinePlayback = $Player/AnimationTree.get("parameters/sm/playback")
+@onready var sm_playback : AnimationNodeStateMachinePlayback = $Character/AnimationTree.get("parameters/sm/playback")
 
 @export var mouse_sens : float = 0.005
 @export var gamepad_sens : float = 0.05
@@ -27,8 +27,6 @@ var projected_speed: float = 0
 var grounded_prev: bool = true
 var grounded: bool = true
 var wish_dir: Vector3 = Vector3.ZERO
-# Get the gravity from the project settings to be synced with RigidBody nodes.
-var gravity = 20.0
 
 # Stepping and camera bobbing
 const STEP_SPEED : float = 20.0
@@ -43,9 +41,9 @@ func _enter_tree():
 	$Label3D.text = name
 
 func _ready():
-	$Player/AnimationTree.active = true
+	$Character/AnimationTree.active = true
 	if not is_multiplayer_authority(): return
-	$Player/Armature/Skeleton3D/Pickle.cast_shadow = MeshInstance3D.SHADOW_CASTING_SETTING_SHADOWS_ONLY
+	$Character/Player/Armature/Skeleton3D/Pickle.cast_shadow = MeshInstance3D.SHADOW_CASTING_SETTING_SHADOWS_ONLY
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	camera.current = true
 
@@ -82,7 +80,7 @@ func process_gamepad():
 func process_animations():
 	# Ground movement blend space
 	var blend = Vector2(velocity.dot(transform.basis.x) / top_speed_ground, -velocity.dot(transform.basis.z) / top_speed_ground)
-	$Player/AnimationTree.set("parameters/sm/ground/blend_position", blend)
+	$Character/AnimationTree.set("parameters/sm/ground/blend_position", blend)
 	# Common states
 	if grounded:
 		sm_playback.travel("ground")
@@ -100,7 +98,7 @@ func clip_velocity(normal: Vector3, overbounce: float) -> void:
 	correction_amount = move_vector.dot(normal) * overbounce
 	correction_dir = normal * correction_amount
 	velocity -= correction_dir
-	velocity.y -= correction_dir.y * gravity * 0.05
+	velocity.y -= correction_dir.y * Game.GRAVITY * 0.05
 
 func apply_friction(delta):
 	var speed_scalar: float = 0
@@ -133,7 +131,7 @@ func air_move(delta):
 	apply_acceleration(accel_air, top_speed_air, delta)
 	clip_velocity(get_wall_normal(), 14.0)
 	clip_velocity(get_floor_normal(), 14.0)
-	velocity.y -= gravity * delta
+	velocity.y -= Game.GRAVITY * delta
 
 func ground_move(delta):
 	floor_snap_length = 0.4
@@ -223,4 +221,4 @@ func add_force(dir : Vector3, force : float):
 
 @rpc("call_local")
 func play_footstep():
-	$Player/SoundStep/AnimationPlayer.play("step")
+	$Character/SoundStep/AnimationPlayer.play("step")

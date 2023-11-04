@@ -15,6 +15,10 @@ func create_server():
 	multiplayer.multiplayer_peer = enet_peer
 	multiplayer.peer_connected.connect(add_player)
 	multiplayer.peer_disconnected.connect(remove_player)
+	for n in 64:
+		var bot = preload("res://scenes/bot.tscn").instantiate()
+		bot.position = Game.get_spawn()
+		Game.world.add_child(bot, true)
 
 func host():
 	create_server()

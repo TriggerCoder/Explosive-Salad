@@ -8,7 +8,7 @@ const MAX_HP : float = 10.0
 func _ready():
 	hp = MAX_HP
 	set_multiplayer_authority(1)
-	$ProgressBar.visible = get_parent().is_multiplayer_authority()
+	$ProgressBar.visible = multiplayer.get_unique_id() == get_parent().get_multiplayer_authority()
 
 func _set_hp(value):
 	if value < hp:
@@ -25,18 +25,26 @@ func die():
 	if dead: return
 	dead = true
 	$"..".visible = false
-	$"../CollisionShape3D".disabled = true
-	$"../CollisionShape3D2".disabled = true
-	$"../Camera3D".current = false
+	if get_parent().has_node("CollisionShape3D"):
+		$"../CollisionShape3D".disabled = true
+	if get_parent().has_node("CollisionShape3D2"):
+		$"../CollisionShape3D2".disabled = true
+	if get_parent().has_node("Camera3D"):
+		$"../Camera3D".current = false
 	await get_tree().create_timer(1.0).timeout
 	dead = false
 	$"..".visible = true
-	$"../CollisionShape3D".disabled = false
-	$"../CollisionShape3D2".disabled = false
-	$"..".position = Vector3(0.0, 2.0, 0.0)
-	$"../Camera3D".current = get_parent().is_multiplayer_authority()
+	if get_parent().has_node("CollisionShape3D"):
+		$"../CollisionShape3D".disabled = false
+	if get_parent().has_node("CollisionShape3D2"):
+		$"../CollisionShape3D2".disabled = false
+	$"..".position = Game.get_spawn()
+	if get_parent().has_node("Camera3D"):
+		$"../Camera3D".current = get_parent().is_multiplayer_authority()
 	hp = MAX_HP
 	var dealer = Game.world.get_node(str(last_damage_dealer))
 	if dealer == null:
 		return
 	dealer.scoreboard.score += 1
+	if get_parent().has_method("is_bot"):
+		get_parent().target = dealer

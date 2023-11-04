@@ -1,0 +1,170 @@
+[gd_scene load_steps=28 format=3 uid="uid://kqygvnjggnce"]
+
+[ext_resource type="PackedScene" uid="uid://cuwpebe64aogs" path="res://assets/Player.glb" id="5_0il0j"]
+[ext_resource type="AudioStream" uid="uid://b7ouer8gpge8d" path="res://sounds/steps/step_1.wav" id="5_e3er6"]
+[ext_resource type="AudioStream" uid="uid://h3rbvwxu75ua" path="res://sounds/steps/step_2.wav" id="6_1qtgw"]
+[ext_resource type="AudioStream" uid="uid://dy08t7iun2vtr" path="res://sounds/steps/step_3.wav" id="7_0hwce"]
+[ext_resource type="AudioStream" uid="uid://dgr3dr8sik3io" path="res://sounds/steps/step_4.wav" id="8_3f6o8"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_cw7y3"]
+animation = &"Air"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_rk63l"]
+animation = &"Attack"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_fapk3"]
+animation = &"Attack_Hand_Left"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_3bg5g"]
+animation = &"Attack_Hand_Right"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_7vap8"]
+animation = &"Idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_6kcai"]
+animation = &"Run_Forward"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_bi1ja"]
+animation = &"Run_Backward"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_p5e3g"]
+animation = &"Run_Left"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_eclx2"]
+animation = &"Run_Right"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_vsrqr"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_7vap8")
+blend_point_0/pos = Vector2(0, 0)
+blend_point_1/node = SubResource("AnimationNodeAnimation_6kcai")
+blend_point_1/pos = Vector2(0, 1)
+blend_point_2/node = SubResource("AnimationNodeAnimation_bi1ja")
+blend_point_2/pos = Vector2(0, -1)
+blend_point_3/node = SubResource("AnimationNodeAnimation_p5e3g")
+blend_point_3/pos = Vector2(-1, 0)
+blend_point_4/node = SubResource("AnimationNodeAnimation_eclx2")
+blend_point_4/pos = Vector2(1, 0)
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_yfvtl"]
+advance_mode = 2
+
+[sub_resource type="Curve" id="Curve_qn18d"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.130024, 0), 0.0, 0.0, 0, 0, Vector2(0.763593, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_1uxcn"]
+xfade_time = 0.25
+xfade_curve = SubResource("Curve_qn18d")
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_v0ak5"]
+xfade_time = 0.1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_mugd5"]
+xfade_time = 0.1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_bgyo2"]
+xfade_time = 0.1
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_yr6ac"]
+xfade_time = 0.1
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_f5ik0"]
+states/End/position = Vector2(803, 100)
+states/Start/position = Vector2(198, 100)
+states/air/node = SubResource("AnimationNodeAnimation_cw7y3")
+states/air/position = Vector2(415, -4)
+states/attack/node = SubResource("AnimationNodeAnimation_rk63l")
+states/attack/position = Vector2(415, 190)
+states/attack_hand_left/node = SubResource("AnimationNodeAnimation_fapk3")
+states/attack_hand_left/position = Vector2(597, 56)
+states/attack_hand_right/node = SubResource("AnimationNodeAnimation_3bg5g")
+states/attack_hand_right/position = Vector2(597, 140)
+states/ground/node = SubResource("AnimationNodeBlendSpace2D_vsrqr")
+states/ground/position = Vector2(415, 100)
+transitions = ["Start", "ground", SubResource("AnimationNodeStateMachineTransition_yfvtl"), "attack", "ground", SubResource("AnimationNodeStateMachineTransition_1uxcn"), "ground", "air", SubResource("AnimationNodeStateMachineTransition_v0ak5"), "air", "ground", SubResource("AnimationNodeStateMachineTransition_mugd5"), "attack_hand_left", "ground", SubResource("AnimationNodeStateMachineTransition_bgyo2"), "attack_hand_right", "ground", SubResource("AnimationNodeStateMachineTransition_yr6ac")]
+graph_offset = Vector2(49, -33)
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_vydrq"]
+graph_offset = Vector2(-415, 111)
+nodes/sm/node = SubResource("AnimationNodeStateMachine_f5ik0")
+nodes/sm/position = Vector2(-20, 160)
+node_connections = [&"output", 0, &"sm"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_1hpt6"]
+streams_count = 4
+stream_0/stream = ExtResource("5_e3er6")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("6_1qtgw")
+stream_1/weight = 1.0
+stream_2/stream = ExtResource("7_0hwce")
+stream_2/weight = 1.0
+stream_3/stream = ExtResource("8_3f6o8")
+stream_3/weight = 1.0
+
+[sub_resource type="Animation" id="Animation_62mxp"]
+resource_name = "step"
+length = 0.2
+tracks/0/type = "audio"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": SubResource("AudioStreamRandomizer_1hpt6")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/0/use_blend = true
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_g1dle"]
+_data = {
+"step": SubResource("Animation_62mxp")
+}
+
+[node name="Character" type="Node3D"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeBlendTree_vydrq")
+anim_player = NodePath("../Player/AnimationPlayer")
+active = true
+parameters/sm/ground/blend_position = Vector2(-0.0018248, 0)
+
+[node name="SoundAttack" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.725, 0.1)
+
+[node name="SoundStep" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="SoundStep"]
+libraries = {
+"": SubResource("AnimationLibrary_g1dle")
+}
+
+[node name="Player" parent="." instance=ExtResource("5_0il0j")]
+
+[node name="Skeleton3D" parent="Player/Armature" index="0"]
+bones/0/position = Vector3(0, 0.699801, 0)
+bones/0/rotation = Quaternion(0.000160776, 8.6977e-06, 9.83663e-05, 1)
+bones/1/rotation = Quaternion(-5.58925e-05, 1.27199e-06, 0.0923295, 0.995729)
+bones/3/rotation = Quaternion(0.698973, 0.0962716, 0.701974, -0.0969547)
+bones/4/rotation = Quaternion(-0.189301, -0.615391, 0.105001, 0.757914)
+bones/5/rotation = Quaternion(0.0738187, 0.747472, -0.0544965, 0.657926)
+bones/6/rotation = Quaternion(-0.693166, 0.13402, 0.695218, 0.135025)
+bones/7/rotation = Quaternion(-0.137525, 0.548165, -0.0180369, 0.824789)
+bones/8/rotation = Quaternion(0.0738187, -0.747472, 0.0544965, 0.657926)
+bones/9/rotation = Quaternion(0.999476, 0.00935231, 0.00894753, -0.0296816)
+bones/10/rotation = Quaternion(-0.0170464, -0.0719658, 0.0104944, 0.997206)
+bones/11/rotation = Quaternion(0.0576042, 0.748856, -0.659177, 0.0371673)
+bones/12/rotation = Quaternion(0.999481, -0.00965436, -0.00929098, -0.0293065)
+bones/13/rotation = Quaternion(-0.0165193, 0.0719712, -0.0104333, 0.997215)
+bones/14/rotation = Quaternion(-0.0581837, 0.748635, -0.659379, -0.0371567)
+
+[editable path="Player"]

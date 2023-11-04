@@ -103,3 +103,4 @@ show_score={
 3d_physics/layer_1="World"
 3d_physics/layer_2="Players"
 3d_physics/layer_3="Props"
+3d_physics/layer_4="Bots"

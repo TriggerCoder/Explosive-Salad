@@ -17,6 +17,11 @@ spawn_path = NodePath("..")
 _spawnable_scenes = PackedStringArray("res://scenes/grenade.tscn")
 spawn_path = NodePath("..")
 
+[node name="BotSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://scenes/bot.tscn")
+spawn_path = NodePath("..")
+spawn_limit = 64
+
 [node name="View" type="Camera3D" parent="."]
 transform = Transform3D(0.999976, -0.00501219, 0.00480578, 0, 0.692088, 0.721813, -0.00694389, -0.721796, 0.692071, 0.0880087, 30.0758, 34.0497)
 current = true

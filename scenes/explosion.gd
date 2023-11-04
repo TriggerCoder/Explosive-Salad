@@ -7,8 +7,6 @@ func _ready():
 	Game.spawn_sound("res://sounds/explosion.wav", position)
 
 func _on_body_entered(body):
-	if !body.has_method("is_player"):
-		return
 	await get_tree().process_frame
 	body.health.hp -= 3.0
 	body.health.last_damage_dealer = instigator

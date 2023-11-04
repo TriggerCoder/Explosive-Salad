@@ -1,0 +1,56 @@
+[gd_scene load_steps=6 format=3 uid="uid://bnykqg0y1m7d8"]
+
+[ext_resource type="Script" path="res://scenes/bot.gd" id="1_j8mkr"]
+[ext_resource type="PackedScene" uid="uid://kqygvnjggnce" path="res://characters/pickle.tscn" id="2_73ex0"]
+[ext_resource type="PackedScene" uid="uid://b5jq1ww01srst" path="res://scenes/health.tscn" id="3_u38ix"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_yk6lx"]
+radius = 0.27
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_ru4km"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/sync = true
+properties/0/watch = false
+properties/1/path = NodePath(".:rotation")
+properties/1/spawn = true
+properties/1/sync = true
+properties/1/watch = false
+properties/2/path = NodePath(".:velocity")
+properties/2/spawn = true
+properties/2/sync = true
+properties/2/watch = false
+
+[node name="Bot" type="CharacterBody3D"]
+collision_layer = 8
+collision_mask = 11
+script = ExtResource("1_j8mkr")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_yk6lx")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+avoidance_enabled = true
+height = 2.0
+use_3d_avoidance = true
+
+[node name="NavigationObstacle3D" type="NavigationObstacle3D" parent="."]
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_ru4km")
+
+[node name="Character" parent="." instance=ExtResource("2_73ex0")]
+
+[node name="RayCast3D" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, -0.25)
+target_position = Vector3(0, 0, -1)
+collision_mask = 2
+
+[node name="Health" parent="." instance=ExtResource("3_u38ix")]
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.25, 0)
+billboard = 1
+modulate = Color(0, 1, 0, 1)
+text = "Zambie"
