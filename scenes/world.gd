@@ -3,6 +3,7 @@ extends Node
 @onready var main_menu = $Menu
 @onready var address_entry = $Menu/Main/MarginContainer/VBoxContainer/AddressEntry
 
+const MAX_BOTS = 16
 const PORT = 27015
 var enet_peer = ENetMultiplayerPeer.new()
 
@@ -15,7 +16,7 @@ func create_server():
 	multiplayer.multiplayer_peer = enet_peer
 	multiplayer.peer_connected.connect(add_player)
 	multiplayer.peer_disconnected.connect(remove_player)
-	for n in 16:
+	for n in MAX_BOTS:
 		var bot = preload("res://scenes/bot.tscn").instantiate()
 		bot.position = Game.get_spawn()
 		Game.world.add_child(bot, true)

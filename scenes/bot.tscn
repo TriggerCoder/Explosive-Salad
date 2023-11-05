@@ -1,11 +1,15 @@
-[gd_scene load_steps=6 format=3 uid="uid://bnykqg0y1m7d8"]
+[gd_scene load_steps=7 format=3 uid="uid://bnykqg0y1m7d8"]
 
 [ext_resource type="Script" path="res://scenes/bot.gd" id="1_j8mkr"]
 [ext_resource type="PackedScene" uid="uid://kqygvnjggnce" path="res://characters/pickle.tscn" id="2_73ex0"]
 [ext_resource type="PackedScene" uid="uid://b5jq1ww01srst" path="res://scenes/health.tscn" id="3_u38ix"]
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_yk6lx"]
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_67y6s"]
 radius = 0.27
+height = 1.556
+
+[sub_resource type="SeparationRayShape3D" id="SeparationRayShape3D_2avrh"]
+length = 0.5
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_ru4km"]
 properties/0/path = NodePath(".:position")
@@ -31,8 +35,12 @@ collision_mask = 11
 script = ExtResource("1_j8mkr")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-shape = SubResource("CapsuleShape3D_yk6lx")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.268, 0)
+shape = SubResource("CapsuleShape3D_67y6s")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.5, 0)
+shape = SubResource("SeparationRayShape3D_2avrh")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 avoidance_enabled = true
