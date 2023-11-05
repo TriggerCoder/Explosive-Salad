@@ -1,7 +1,7 @@
 # Explosive Salad
 A multiplayer prototype made with Godot Engine 4.1.
 
-[<img src="https://img.youtube.com/vi/qWzWZTfvl8Q/0.jpg">](https://www.youtube.com/watch?v=qWzWZTfvl8Q)
+[<img src="https://img.youtube.com/vi/qWzWZTfvl8Q/0.jpg">](https://www.youtube.com/watch?v=nuQLFFP0kBo)
 
 ## Features
 - Animated characters
