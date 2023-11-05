@@ -26,9 +26,9 @@ A multiplayer prototype made with Godot Engine 4.1.
 | --- | --- | --- |
 | <kbd>W</kbd> <kbd>A</kbd> <kbd>S</kbd> <kbd>D</kbd> | <kbd>Left Stick</kbd> | Movement |
 | <kbd>Mouse Movement</kbd> | <kbd>Right Stick</kbd> | Look around |
-| <kbd>Spacebar</kbd> | <kbd>X</kbd> | Jump |
+| <kbd>Spacebar</kbd> | <kbd>A</kbd> | Jump |
 | <kbd>Left Mouse Button</kbd> | <kbd>Right Trigger</kbd> | Shoot |
-| <kbd>Tab</kbd> | <kbd>Select</kbd> | Scoreboard |
+| <kbd>Tab</kbd> | <kbd>Back</kbd> | Scoreboard |
 
 ## Credits
 - Based on a simple multiplayer FPS prototype by [**devloglogan**](https://github.com/devloglogan) 
