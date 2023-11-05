@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://buvsxdeqla87h"]
+
+[ext_resource type="Texture2D" uid="uid://d3m216gdp1h6f" path="res://addons/kenney_particle_pack/smoke_08.png" id="1_wjmi7"]
+
+[node name="Stain" type="Decal"]
+size = Vector3(4, 1, 4)
+texture_albedo = ExtResource("1_wjmi7")
+modulate = Color(0.266667, 1, 0, 1)

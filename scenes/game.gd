@@ -31,3 +31,18 @@ func spawn_ragdoll(skeleton : Skeleton3D, last_velocity : Vector3):
 	# await get_tree().process_frame
 	ragdoll.get_node("Physical Bone Pelvis").apply_central_impulse(last_velocity.normalized() * 100.0)
 	
+func spawn_decal(path, pos, norm):
+	var decal = load(path).instantiate()
+	decal.position = pos
+	world.add_child(decal)
+	decal.transform = align_with_y(decal.transform, norm)
+	decal.rotation.y = randf_range(-1.5, 1.5)
+	await get_tree().create_timer(5.0).timeout
+	decal.queue_free()
+
+# https://kidscancode.org/godot_recipes/3.x/3d/3d_align_surface/
+func align_with_y(t, new_y):
+	t.basis.y = new_y
+	t.basis.x = -t.basis.z.cross(new_y)
+	t.basis = t.basis.orthonormalized()
+	return t

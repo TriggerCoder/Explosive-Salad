@@ -17,6 +17,7 @@ var last_velocity : Vector3
 func _ready() -> void:
 	health.connect("died", _on_death)
 	health.connect("spawned", _on_spawn)
+	health.connect("hurt", _on_hurt)
 	$Character/AnimationTree.active = true
 	navigation_agent.velocity_computed.connect(_on_velocity_computed)
 	navigation_agent.link_reached.connect(_on_navlink_reached)
@@ -129,3 +130,11 @@ func _on_spawn():
 	visible = true
 	$CollisionShape3D.disabled = false
 	position = Game.get_spawn()
+
+func _on_hurt():
+	Game.spawn_sound("res://sounds/pain.wav", position)
+	$Character/Juice.restart()
+	$Character/Juice.rotation = Vector3(randf_range(-1.5, 1.5), 0.0, randf_range(-1.5, 1.5))
+	var pos = $Character/Juice/RayCast3D.get_collision_point()
+	var norm = $Character/Juice/RayCast3D.get_collision_normal()
+	Game.spawn_decal("res://decals/stain.tscn", pos, norm)

@@ -1,5 +1,6 @@
 extends Node
 
+signal hurt
 signal died
 signal spawned
 
@@ -15,7 +16,7 @@ func _ready():
 
 func _set_hp(value):
 	if value < hp:
-		Game.spawn_sound("res://sounds/pain.wav", get_parent().position)
+		emit_signal("hurt")
 	hp = value
 	$ProgressBar.value = value
 	if value <= 0.0:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://kqygvnjggnce"]
+[gd_scene load_steps=41 format=3 uid="uid://kqygvnjggnce"]
 
 [ext_resource type="AudioStream" uid="uid://c70qa2nwa1lwn" path="res://sounds/farts/fart_1.wav" id="1_dlsv4"]
 [ext_resource type="AudioStream" uid="uid://do2w0kt07sy6a" path="res://sounds/farts/fart_2.wav" id="2_skuty"]
@@ -9,6 +9,7 @@
 [ext_resource type="AudioStream" uid="uid://h3rbvwxu75ua" path="res://sounds/steps/step_2.wav" id="6_1qtgw"]
 [ext_resource type="AudioStream" uid="uid://dy08t7iun2vtr" path="res://sounds/steps/step_3.wav" id="7_0hwce"]
 [ext_resource type="AudioStream" uid="uid://dgr3dr8sik3io" path="res://sounds/steps/step_4.wav" id="8_3f6o8"]
+[ext_resource type="Texture2D" uid="uid://d3m216gdp1h6f" path="res://addons/kenney_particle_pack/smoke_08.png" id="10_54se4"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_cw7y3"]
 animation = &"Air"
@@ -143,6 +144,45 @@ _data = {
 "step": SubResource("Animation_62mxp")
 }
 
+[sub_resource type="Gradient" id="Gradient_n3cbb"]
+offsets = PackedFloat32Array(0.52973, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_tmx64"]
+gradient = SubResource("Gradient_n3cbb")
+
+[sub_resource type="Curve" id="Curve_514vv"]
+_data = [Vector2(0, 1), 0.0, 0.324812, 0, 0, Vector2(1, 0), -3.41053, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_hqq4u"]
+curve = SubResource("Curve_514vv")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_t6fgb"]
+direction = Vector3(0, 0, 0)
+spread = 180.0
+gravity = Vector3(0, -0.5, 0)
+initial_velocity_min = 3.0
+initial_velocity_max = 3.0
+angle_min = -720.0
+angle_max = 720.0
+scale_min = 0.1
+scale_curve = SubResource("CurveTexture_hqq4u")
+color_ramp = SubResource("GradientTexture1D_tmx64")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yx35w"]
+transparency = 1
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.266667, 1, 0, 1)
+albedo_texture = ExtResource("10_54se4")
+billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_al5u1"]
+material = SubResource("StandardMaterial3D_yx35w")
+
 [node name="Character" type="Node3D"]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
 
@@ -170,19 +210,33 @@ libraries = {
 
 [node name="Skeleton3D" parent="Player/Armature" index="0"]
 bones/0/position = Vector3(0, 0.699819, 0)
-bones/0/rotation = Quaternion(0.00016081, 7.71252e-06, 8.72245e-05, 1)
-bones/1/rotation = Quaternion(-6.26492e-05, 6.02154e-06, 0.0517657, 0.998659)
-bones/3/rotation = Quaternion(0.700765, 0.0822181, 0.703779, -0.0828408)
-bones/4/rotation = Quaternion(-0.150648, -0.620006, 0.0738494, 0.766449)
+bones/0/rotation = Quaternion(0.0001608, 8.00539e-06, 9.05367e-05, 1)
+bones/1/rotation = Quaternion(-5.28148e-05, 1.03574e-05, -0.0891612, 0.996017)
+bones/3/rotation = Quaternion(0.69759, 0.105834, 0.700581, -0.106559)
+bones/4/rotation = Quaternion(-0.166346, -0.618328, 0.086487, 0.763229)
 bones/5/rotation = Quaternion(0.0738187, 0.747472, -0.0544965, 0.657926)
-bones/6/rotation = Quaternion(-0.701495, 0.0796586, 0.703619, 0.0805016)
-bones/7/rotation = Quaternion(-0.128025, 0.548356, -0.0117657, 0.826303)
+bones/6/rotation = Quaternion(-0.699723, 0.0939613, 0.701829, 0.0948476)
+bones/7/rotation = Quaternion(-0.184192, 0.546161, -0.0489764, 0.81571)
 bones/8/rotation = Quaternion(0.0738187, -0.747472, 0.0544965, 0.657926)
-bones/9/rotation = Quaternion(0.999476, 0.00929736, 0.00895967, -0.0296921)
+bones/9/rotation = Quaternion(0.999476, 0.00921157, 0.00897911, -0.0297083)
 bones/10/rotation = Quaternion(-0.0170464, -0.0719658, 0.0104944, 0.997206)
-bones/11/rotation = Quaternion(0.0580383, 0.748741, -0.659289, 0.0368453)
-bones/12/rotation = Quaternion(0.999481, -0.00961684, -0.0092911, -0.0293057)
-bones/13/rotation = Quaternion(-0.0158232, 0.072056, -0.010399, 0.997221)
-bones/14/rotation = Quaternion(-0.0580062, 0.748414, -0.659641, -0.0372245)
+bones/11/rotation = Quaternion(0.0579324, 0.748799, -0.659228, 0.0369015)
+bones/12/rotation = Quaternion(0.999482, -0.00955532, -0.00929131, -0.0293047)
+bones/13/rotation = Quaternion(-0.0157271, 0.0720684, -0.0103948, 0.997222)
+bones/14/rotation = Quaternion(-0.0580319, 0.748454, -0.659593, -0.037213)
+
+[node name="Juice" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 0)
+emitting = false
+amount = 16
+lifetime = 0.5
+one_shot = true
+explosiveness = 0.99
+process_material = SubResource("ParticleProcessMaterial_t6fgb")
+draw_pass_1 = SubResource("QuadMesh_al5u1")
+
+[node name="RayCast3D" type="RayCast3D" parent="Juice"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+target_position = Vector3(0, -5, 0)
 
 [editable path="Player"]

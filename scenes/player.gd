@@ -46,6 +46,7 @@ func _enter_tree():
 func _ready():
 	health.connect("died", _on_death)
 	health.connect("spawned", _on_spawn)
+	health.connect("hurt", _on_hurt)
 	$Character/AnimationTree.active = true
 	if not is_multiplayer_authority(): return
 	$Character/Player/Armature/Skeleton3D/Pickle.cast_shadow = MeshInstance3D.SHADOW_CASTING_SETTING_SHADOWS_ONLY
@@ -243,3 +244,7 @@ func _on_spawn():
 	$CollisionShape3D2.disabled = false
 	position = Game.get_spawn()
 	$Camera3D.current = is_multiplayer_authority()
+
+func _on_hurt():
+	Game.spawn_sound("res://sounds/pain.wav", position)
+	$Character/Juice.restart()
